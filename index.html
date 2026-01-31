@@ -7,14 +7,19 @@
 
   <style>
     :root{
-      --bg:#ffffff;
+      --bg:#ffffff;               /* WHITE background */
+      --panel:#ffffff;
       --text:#0b1220;
       --muted:#475569;
-      --blue:#2563eb;
-      --blue2:#60a5fa;
-      --shadow:0 18px 60px rgba(2,6,23,.10);
-      --radius:22px;
-      --max:1100px;
+      --border: rgba(2,6,23,.10);
+      --shadow: 0 18px 60px rgba(2,6,23,.10);
+      --radius: 16px;
+
+      /* blue accents (subtle) */
+      --accent:#2563eb;
+      --accent2:#60a5fa;
+
+      --max: 1000px;
     }
 
     *{box-sizing:border-box}
@@ -22,36 +27,42 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       background:
-        radial-gradient(900px 520px at 50% -10%, rgba(96,165,250,.35), transparent 60%),
-        radial-gradient(800px 520px at 90% 10%, rgba(37,99,235,.18), transparent 55%),
+        radial-gradient(900px 520px at 50% -10%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(800px 520px at 90% 10%, rgba(37,99,235,.10), transparent 55%),
         var(--bg);
       color:var(--text);
     }
+    a{color:inherit; text-decoration:none}
 
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:24px 18px 80px;
+    .wrap{max-width:var(--max); margin:0 auto; padding:30px 18px 90px}
+    .center{text-align:center}
+
+    /* HERO */
+    .heroTitle{
+      margin: 8px 0 14px;
+      font-size: clamp(26px, 4.6vw, 44px);
+      letter-spacing:-.03em;
+      font-weight:900;
     }
 
-    /* HERO VIDEO */
     .heroVideo{
-      position:relative;
-      border-radius:var(--radius);
+      width: min(720px, 100%);
+      margin: 0 auto;
+      border-radius: 14px;
       overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow: var(--shadow);
       background:#000;
-      box-shadow:var(--shadow);
+      position:relative;
     }
-
     .heroVideo::before{
       content:"";
       position:absolute;
       inset:-2px -2px auto -2px;
       height:3px;
-      background:linear-gradient(90deg,transparent,var(--blue),var(--blue2),transparent);
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,.55), rgba(96,165,250,.55), transparent);
       z-index:2;
     }
-
     .heroVideo iframe{
       width:100%;
       aspect-ratio:16/9;
@@ -59,50 +70,117 @@
       display:block;
     }
 
-    .heroText{
-      text-align:center;
-      margin:26px auto 0;
+    .priceRow{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      align-items:baseline;
+      margin: 10px 0 10px;
+      font-weight:900;
+    }
+    .priceRow s{
+      color: rgba(11,18,32,.40);
+      font-weight:800;
+      font-size: 12px;
+    }
+    .priceRow b{
+      font-size: 16px;
+    }
+    .priceRow span{
+      color: rgba(11,18,32,.55);
+      font-weight:800;
+      font-size: 11px;
+      letter-spacing:.04em;
+      text-transform: uppercase;
     }
 
-    .heroText h1{
-      margin:0;
-      font-size:clamp(32px,5vw,56px);
-      letter-spacing:-.03em;
-      line-height:1.05;
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius: 10px;
+      font-weight:900;
+      color:#fff;
+      background: linear-gradient(90deg, #f59e0b, #d97706); /* orange like screenshot */
+      border: 1px solid rgba(217,119,6,.35);
+      box-shadow: 0 16px 40px rgba(217,119,6,.18);
     }
+    .cta:hover{filter:saturate(1.05)}
 
-    .heroText p{
-      margin:10px auto 0;
-      max-width:680px;
-      color:rgba(11,18,32,.62);
-      font-size:15px;
+    .heroSub{
+      margin: 10px auto 0;
+      max-width: 720px;
+      color: rgba(11,18,32,.62);
+      font-size: 12.5px;
       line-height:1.55;
     }
 
-    /* SECTION */
+    /* SECTION HEADERS */
     .sectionTitle{
-      margin:42px 0 18px;
-      font-size:13px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:rgba(11,18,32,.55);
+      margin: 28px 0 14px;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing:-.02em;
       text-align:center;
-      font-weight:900;
     }
 
-    /* VIDEO STACK */
-    .videoStack{
+    /* FEATURES (alternating layout) */
+    .features{
+      margin-top: 18px;
       display:grid;
-      gap:20px;
+      gap: 26px;
+    }
+
+    .featureRow{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items:center;
+    }
+    @media (max-width: 900px){
+      .featureRow{ grid-template-columns: 1fr; }
+    }
+
+    .featText{
+      color: rgba(11,18,32,.78);
+      padding: 6px 6px;
+    }
+    .featTitle{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+    .check{
+      width:18px; height:18px;
+      border-radius: 999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(37,99,235,.10);
+      border:1px solid rgba(37,99,235,.22);
+      color: var(--accent);
+      font-size: 12px;
+      flex: 0 0 auto;
+    }
+    .featText p{
+      margin:0;
+      color: rgba(11,18,32,.62);
+      font-size: 12.5px;
+      line-height:1.55;
+      max-width: 420px;
     }
 
     .videoCard{
-      border-radius:18px;
+      border-radius: 14px;
       overflow:hidden;
       background:#000;
-      box-shadow:var(--shadow);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      position:relative;
     }
-
     .videoCard iframe{
       width:100%;
       aspect-ratio:16/9;
@@ -110,23 +188,90 @@
       display:block;
     }
 
-    /* OPTIONAL CTA */
-    .ctaWrap{
-      text-align:center;
-      margin-top:46px;
+    /* Alternate rows: swap order on desktop */
+    .reverse .featText{ order: 2; }
+    .reverse .videoCard{ order: 1; }
+    @media (max-width: 900px){
+      .reverse .featText, .reverse .videoCard{ order: unset; }
     }
 
-    .cta{
-      display:inline-flex;
-      align-items:center;
+    /* Pills row */
+    .pills{
+      margin: 24px auto 12px;
+      display:flex;
+      gap:10px;
       justify-content:center;
-      padding:14px 22px;
-      border-radius:14px;
-      background:linear-gradient(135deg,var(--blue),var(--blue2));
-      color:#fff;
-      font-weight:900;
-      text-decoration:none;
-      box-shadow:0 14px 34px rgba(37,99,235,.22);
+      flex-wrap:wrap;
+    }
+    .pill{
+      padding:7px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(2,6,23,.14);
+      background: rgba(255,255,255,.7);
+      font-size: 11px;
+      font-weight: 900;
+      color: rgba(11,18,32,.78);
+    }
+    .pill.active{
+      border-color: rgba(217,119,6,.35);
+      background: rgba(245,158,11,.12);
+      color: rgba(11,18,32,.88);
+    }
+
+    .pillBox{
+      width: min(720px, 100%);
+      margin: 0 auto;
+      border-radius: 12px;
+      border:1px solid rgba(2,6,23,.12);
+      background: rgba(255,255,255,.75);
+      box-shadow: 0 14px 40px rgba(2,6,23,.08);
+      padding: 12px 14px;
+      text-align:center;
+      color: rgba(11,18,32,.62);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    /* bottom CTA */
+    .bottomCta{
+      margin: 18px 0 8px;
+      text-align:center;
+    }
+
+    /* FAQ */
+    .faqTitle{
+      margin: 34px 0 14px;
+      text-align:center;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing:-.02em;
+    }
+    .faq{
+      width: min(820px, 100%);
+      margin: 0 auto;
+      display:grid;
+      gap: 10px;
+    }
+    details{
+      border:1px solid rgba(2,6,23,.12);
+      background: rgba(255,255,255,.78);
+      border-radius: 12px;
+      padding: 12px 14px;
+      box-shadow: 0 12px 36px rgba(2,6,23,.08);
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 900;
+      list-style:none;
+      color: rgba(11,18,32,.88);
+      font-size: 12.5px;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin: 10px 0 0;
+      color: rgba(11,18,32,.62);
+      font-size: 12.5px;
+      line-height:1.55;
     }
   </style>
 </head>
@@ -134,92 +279,148 @@
 <body>
   <main class="wrap">
 
-    <!-- HERO YOUTUBE VIDEO -->
-    <div class="heroVideo">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/HERO_VIDEO_ID
-          ?autoplay=1
-          &mute=1
-          &loop=1
-          &playlist=HERO_VIDEO_ID
-          &controls=0
-          &showinfo=0
-          &rel=0
-          &modestbranding=1
-          &playsinline=1"
-        allow="autoplay; fullscreen"
-        allowfullscreen>
-      </iframe>
-    </div>
+    <!-- HERO -->
+    <div class="center">
+      <div class="heroTitle">The ULTIMATE</div>
 
-    <!-- HERO TEXT -->
-    <div class="heroText">
-      <h1>The Ultimate Your Product Name</h1>
-      <p>
-        Short, high-impact line explaining what this is and why people want it.
-      </p>
-    </div>
-
-    <!-- MORE VIDEOS -->
-    <h2 class="sectionTitle">See It In Action</h2>
-
-    <section class="videoStack">
-
-      <div class="videoCard">
+      <div class="heroVideo">
+        <!-- Replace HERO_VIDEO_ID with your YouTube ID -->
         <iframe
-          src="https://www.youtube-nocookie.com/embed/VIDEO_1_ID
-            ?autoplay=1
-            &mute=1
-            &loop=1
-            &playlist=VIDEO_1_ID
-            &controls=0
-            &rel=0
-            &playsinline=1"
+          src="https://www.youtube-nocookie.com/embed/HERO_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=HERO_VIDEO_ID&controls=0&rel=0&modestbranding=1&playsinline=1"
           allow="autoplay; fullscreen"
           allowfullscreen>
         </iframe>
       </div>
 
-      <div class="videoCard">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/VIDEO_2_ID
-            ?autoplay=1
-            &mute=1
-            &loop=1
-            &playlist=VIDEO_2_ID
-            &controls=0
-            &rel=0
-            &playsinline=1"
-          allow="autoplay; fullscreen"
-          allowfullscreen>
-        </iframe>
+      <div class="priceRow">
+        <s>$100</s>
+        <b>$50</b>
+        <span>one-time payment</span>
       </div>
 
-      <div class="videoCard">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/VIDEO_3_ID
-            ?autoplay=1
-            &mute=1
-            &loop=1
-            &playlist=VIDEO_3_ID
-            &controls=0
-            &rel=0
-            &playsinline=1"
-          allow="autoplay; fullscreen"
-          allowfullscreen>
-        </iframe>
+      <!-- Replace with your Whop checkout -->
+      <a class="cta" href="https://your-whop-checkout-link" target="_blank" rel="noopener">
+        Get Sway Now
+      </a>
+
+      <div class="heroSub">
+        Gain INSTANT access to everything including tutorials & updates.
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="sectionTitle">Powerful Features</div>
+
+    <section class="features">
+
+      <!-- Row 1: text left, video right -->
+      <div class="featureRow">
+        <div class="featText">
+          <div class="featTitle"><span class="check">✓</span> Autogreen</div>
+          <p>
+            Replace this description with your feature text (1–2 lines).
+          </p>
+        </div>
+        <div class="videoCard">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/FEATURE1_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=FEATURE1_VIDEO_ID&controls=0&rel=0&modestbranding=1&playsinline=1"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Row 2: video left, text right -->
+      <div class="featureRow reverse">
+        <div class="featText">
+          <div class="featTitle"><span class="check">✓</span> AI Tempo</div>
+          <p>
+            Replace this description with your feature text (1–2 lines).
+          </p>
+        </div>
+        <div class="videoCard">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/FEATURE2_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=FEATURE2_VIDEO_ID&controls=0&rel=0&modestbranding=1&playsinline=1"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Row 3: text left, video right -->
+      <div class="featureRow">
+        <div class="featText">
+          <div class="featTitle"><span class="check">✓</span> Infinite Stamina</div>
+          <p>
+            Replace this description with your feature text (1–2 lines).
+          </p>
+        </div>
+        <div class="videoCard">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/FEATURE3_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=FEATURE3_VIDEO_ID&controls=0&rel=0&modestbranding=1&playsinline=1"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Row 4: video left, text right -->
+      <div class="featureRow reverse">
+        <div class="featText">
+          <div class="featTitle"><span class="check">✓</span> Dribble Combos</div>
+          <p>
+            Replace this description with your feature text (1–2 lines).
+          </p>
+        </div>
+        <div class="videoCard">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/FEATURE4_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=FEATURE4_VIDEO_ID&controls=0&rel=0&modestbranding=1&playsinline=1"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+          </iframe>
+        </div>
       </div>
 
     </section>
 
-    <!-- OPTIONAL CTA -->
-    <div class="ctaWrap">
-      <a class="cta" href="https://your-checkout-link" target="_blank">
-        Get Access →
+    <!-- Pills row -->
+    <div class="pills">
+      <div class="pill active">AI Defense</div>
+      <div class="pill">Haptic Shots</div>
+      <div class="pill">Meter Dunk</div>
+      <div class="pill">Spot Take</div>
+    </div>
+
+    <div class="pillBox">
+      Put the text you want here (like an explanation of a mode). This matches the little box under the pills on the screenshot.
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="bottomCta">
+      <a class="cta" href="https://your-whop-checkout-link" target="_blank" rel="noopener">
+        Get Sway Now
       </a>
     </div>
+
+    <!-- FAQ -->
+    <div class="faqTitle">Frequently Asked Questions</div>
+    <section class="faq">
+      <details>
+        <summary>Is using this safe?</summary>
+        <p>Answer here. Keep it short and clear.</p>
+      </details>
+      <details>
+        <summary>What’s included?</summary>
+        <p>Answer here. List what they get.</p>
+      </details>
+      <details>
+        <summary>How do I install it?</summary>
+        <p>Answer here. Step-by-step in 1–2 lines.</p>
+      </details>
+    </section>
 
   </main>
 </body>
 </html>
+
 
