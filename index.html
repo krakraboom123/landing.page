@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Your Product</title>
+  <title>The ULTIMATE</title>
 
   <style>
     :root{
-      --bg:#ffffff;               /* WHITE background */
+      --bg:#ffffff;
       --panel:#ffffff;
       --text:#0b1220;
       --muted:#475569;
@@ -15,9 +15,13 @@
       --shadow: 0 18px 60px rgba(2,6,23,.10);
       --radius: 16px;
 
-      /* blue accents (subtle) */
+      /* accents */
       --accent:#2563eb;
       --accent2:#60a5fa;
+
+      /* orange CTA like screenshot */
+      --cta1:#f59e0b;
+      --cta2:#d97706;
 
       --max: 1000px;
     }
@@ -54,6 +58,8 @@
       box-shadow: var(--shadow);
       background:#000;
       position:relative;
+      transition: transform .18s ease, box-shadow .18s ease;
+      transform: translateZ(0);
     }
     .heroVideo::before{
       content:"";
@@ -62,12 +68,18 @@
       height:3px;
       background: linear-gradient(90deg, transparent, rgba(37,99,235,.55), rgba(96,165,250,.55), transparent);
       z-index:2;
+      pointer-events:none;
     }
     .heroVideo iframe{
       width:100%;
       aspect-ratio:16/9;
       border:0;
       display:block;
+    }
+    /* hover pop */
+    .heroVideo:hover{
+      transform: scale(1.03);
+      box-shadow: 0 26px 70px rgba(2,6,23,.16);
     }
 
     .priceRow{
@@ -102,11 +114,12 @@
       border-radius: 10px;
       font-weight:900;
       color:#fff;
-      background: linear-gradient(90deg, #f59e0b, #d97706); /* orange like screenshot */
+      background: linear-gradient(90deg, var(--cta1), var(--cta2));
       border: 1px solid rgba(217,119,6,.35);
       box-shadow: 0 16px 40px rgba(217,119,6,.18);
+      transition: transform .15s ease, filter .15s ease;
     }
-    .cta:hover{filter:saturate(1.05)}
+    .cta:hover{filter:saturate(1.05); transform: translateY(-1px)}
 
     .heroSub{
       margin: 10px auto 0;
@@ -180,12 +193,19 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       position:relative;
+      transition: transform .18s ease, box-shadow .18s ease;
+      transform: translateZ(0);
     }
     .videoCard iframe{
       width:100%;
       aspect-ratio:16/9;
       border:0;
       display:block;
+    }
+    /* hover pop */
+    .videoCard:hover{
+      transform: scale(1.04);
+      box-shadow: 0 26px 70px rgba(2,6,23,.16);
     }
 
     /* Alternate rows: swap order on desktop */
@@ -195,7 +215,7 @@
       .reverse .featText, .reverse .videoCard{ order: unset; }
     }
 
-    /* Pills row */
+    /* Pills (clickable tabs) */
     .pills{
       margin: 24px auto 12px;
       display:flex;
@@ -211,7 +231,11 @@
       font-size: 11px;
       font-weight: 900;
       color: rgba(11,18,32,.78);
+      cursor:pointer;
+      user-select:none;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
     }
+    .pill:hover{ transform: translateY(-1px); }
     .pill.active{
       border-color: rgba(217,119,6,.35);
       background: rgba(245,158,11,.12);
@@ -230,6 +254,10 @@
       color: rgba(11,18,32,.62);
       font-size: 12px;
       line-height: 1.55;
+      min-height: 52px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
     /* bottom CTA */
@@ -273,6 +301,13 @@
       font-size: 12.5px;
       line-height:1.55;
     }
+
+    /* Reduce motion support */
+    @media (prefers-reduced-motion: reduce){
+      .videoCard, .heroVideo, .pill, .cta{ transition:none !important; }
+      .videoCard:hover, .heroVideo:hover{ transform:none !important; }
+      .pill:hover, .cta:hover{ transform:none !important; }
+    }
   </style>
 </head>
 
@@ -299,8 +334,8 @@
       </div>
 
       <!-- Replace with your Whop checkout -->
-      <a class="cta" href="https://whop.com/checkout/plan_y1ebV1Shd65OR" target="_blank" rel="noopener">
-        Get Sway Now
+      <a class="cta" href="https://your-whop-checkout-link" target="_blank" rel="noopener">
+        Get Ultimate Now
       </a>
 
       <div class="heroSub">
@@ -317,9 +352,7 @@
       <div class="featureRow">
         <div class="featText">
           <div class="featTitle"><span class="check">✓</span> Autogreen</div>
-          <p>
-            Replace this description with your feature text (1–2 lines).
-          </p>
+          <p>Replace this description with your feature text (1–2 lines).</p>
         </div>
         <div class="videoCard">
           <iframe
@@ -334,9 +367,9 @@
       <div class="featureRow reverse">
         <div class="featText">
           <div class="featTitle"><span class="check">✓</span> AI Tempo</div>
-          <p>
-            Replace this description with your feature text (1–2 lines).
-          </p>
+          <p>Repl
+::contentReference[oaicite:0]{index=0}
+ace this description with your feature text (1–2 lines).</p>
         </div>
         <div class="videoCard">
           <iframe
@@ -351,9 +384,7 @@
       <div class="featureRow">
         <div class="featText">
           <div class="featTitle"><span class="check">✓</span> Infinite Stamina</div>
-          <p>
-            Replace this description with your feature text (1–2 lines).
-          </p>
+          <p>Replace this description with your feature text (1–2 lines).</p>
         </div>
         <div class="videoCard">
           <iframe
@@ -368,9 +399,7 @@
       <div class="featureRow reverse">
         <div class="featText">
           <div class="featTitle"><span class="check">✓</span> Dribble Combos</div>
-          <p>
-            Replace this description with your feature text (1–2 lines).
-          </p>
+          <p>Replace this description with your feature text (1–2 lines).</p>
         </div>
         <div class="videoCard">
           <iframe
@@ -383,22 +412,22 @@
 
     </section>
 
-    <!-- Pills row -->
-    <div class="pills">
-      <div class="pill active">AI Defense</div>
-      <div class="pill">Haptic Shots</div>
-      <div class="pill">Meter Dunk</div>
-      <div class="pill">Spot Take</div>
+    <!-- Pills row (clickable) -->
+    <div class="pills" id="pills">
+      <div class="pill active" data-key="ai-defense">AI Defense</div>
+      <div class="pill" data-key="haptic-shots">Haptic Shots</div>
+      <div class="pill" data-key="meter-dunk">Meter Dunk</div>
+      <div class="pill" data-key="spot-take">Spot Take</div>
     </div>
 
-    <div class="pillBox">
-      Put the text you want here (like an explanation of a mode). This matches the little box under the pills on the screenshot.
+    <div class="pillBox" id="pillBox">
+      AI Defense: Hold L2+R2 / LT+RT to activate AI-driven tracking. Stay glued to your opponent’s hip automatically.
     </div>
 
     <!-- Bottom CTA -->
     <div class="bottomCta">
-      <a class="cta" href="https://whop.com/checkout/plan_y1ebV1Shd65OR" target="_blank" rel="noopener">
-        Get Sway Now
+      <a class="cta" href="https://your-whop-checkout-link" target="_blank" rel="noopener">
+        Get Ultimate Now
       </a>
     </div>
 
@@ -420,7 +449,30 @@
     </section>
 
   </main>
+
+  <script>
+    // Clickable pills -> update explanation text
+    (function () {
+      const pillBox = document.getElementById('pillBox');
+      const pills = Array.from(document.querySelectorAll('.pill'));
+
+      const descriptions = {
+        "ai-defense": "AI Defense: Hold L2+R2 / LT+RT to activate AI-driven tracking. Stay glued to your opponent’s hip automatically.",
+        "haptic-shots": "Haptic Shots: Get vibration feedback that helps you time releases more consistently (works best in high-latency games).",
+        "meter-dunk": "Meter Dunk: Enables a tuned dunk meter profile for more consistent greens when you go up in traffic.",
+        "spot-take": "Spot Take: Quick-trigger spot-up timing adjustments that help you hit cleaner catch-and-shoot releases."
+      };
+
+      pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          pills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+
+          const key = pill.getAttribute('data-key');
+          pillBox.textContent = descriptions[key] || "";
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
-
-
